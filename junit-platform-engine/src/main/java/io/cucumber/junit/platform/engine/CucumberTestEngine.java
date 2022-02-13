@@ -39,7 +39,7 @@ public final class CucumberTestEngine extends HierarchicalTestEngine<CucumberEng
 
     @Override
     public TestDescriptor discover(EngineDiscoveryRequest discoveryRequest, UniqueId uniqueId) {
-        CucumberEngineDescriptor engineDescriptor = new CucumberEngineDescriptor(uniqueId);
+        CucumberEngineDescriptor engineDescriptor = new CucumberEngineDescriptor(uniqueId, this.getId());
         new DiscoverySelectorResolver().resolveSelectors(discoveryRequest, engineDescriptor);
         return engineDescriptor;
     }

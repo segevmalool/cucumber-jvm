@@ -35,7 +35,8 @@ class FeatureResolverTest {
     private final String featurePath = "io/cucumber/junit/platform/engine/feature-with-outline.feature";
     private final String featureSegmentValue = CLASSPATH_SCHEME_PREFIX + featurePath;
     private final UniqueId id = UniqueId.forEngine(new CucumberTestEngine().getId());
-    private final CucumberEngineDescriptor engineDescriptor = new CucumberEngineDescriptor(id);
+    private final String engId = "mytestid";
+    private final CucumberEngineDescriptor engineDescriptor = new CucumberEngineDescriptor(id, engId);
     private ConfigurationParameters configurationParameters = new EmptyConfigurationParameters();
 
     @Test

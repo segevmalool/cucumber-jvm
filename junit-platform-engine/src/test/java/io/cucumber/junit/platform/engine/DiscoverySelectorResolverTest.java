@@ -60,7 +60,8 @@ class DiscoverySelectorResolverTest {
     void before() {
         LoggerFactory.addListener(logRecordListener);
         UniqueId id = UniqueId.forEngine(new CucumberTestEngine().getId());
-        testDescriptor = new CucumberEngineDescriptor(id);
+        String engId = "mytestid";
+        testDescriptor = new CucumberEngineDescriptor(id, engId);
         assertEquals(0, testDescriptor.getChildren().size());
     }
 

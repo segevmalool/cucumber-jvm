@@ -9,10 +9,19 @@ import java.util.Optional;
 
 class CucumberEngineDescriptor extends EngineDescriptor implements Node<CucumberEngineExecutionContext> {
 
-    static final String ENGINE_ID = "cucumber";
+    private static String ENGINE_ID;
 
-    CucumberEngineDescriptor(UniqueId uniqueId) {
+    CucumberEngineDescriptor(UniqueId uniqueId, String engineId) {
         super(uniqueId, "Cucumber");
+        this.setEngineId(engineId);
+    }
+
+    public static String getEngineId() {
+        return ENGINE_ID;
+    }
+
+    private static void setEngineId(String engineId) {
+        ENGINE_ID = engineId;
     }
 
     private static void recursivelyMerge(TestDescriptor descriptor, TestDescriptor parent) {

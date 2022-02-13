@@ -9,5 +9,6 @@ module io.cucumber.junit.platform.engine {
     requires transitive org.junit.platform.engine;
 
     exports io.cucumber.junit.platform.engine;
-    provides org.junit.platform.engine.TestEngine with io.cucumber.junit.platform.engine.CucumberTestEngine;
+    uses org.junit.platform.engine.TestEngine;
+    provides org.junit.platform.engine.TestEngine with io.cucumber.junit.platform.engine.CucumberTestEngine, io.cucumber.junit.platform.engine.CucumberReactiveTestEngine;
 }

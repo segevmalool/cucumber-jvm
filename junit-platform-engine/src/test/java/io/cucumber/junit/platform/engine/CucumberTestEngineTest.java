@@ -14,7 +14,6 @@ import java.util.Optional;
 import static io.cucumber.junit.platform.engine.Constants.FILTER_NAME_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.FILTER_TAGS_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PUBLISH_QUIET_PROPERTY_NAME;
-import static io.cucumber.junit.platform.engine.CucumberEngineDescriptor.ENGINE_ID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectFile;
@@ -29,7 +28,9 @@ class CucumberTestEngineTest {
 
     @Test
     void id() {
-        assertEquals(ENGINE_ID, engine.getId());
+        UniqueId id = UniqueId.parse("myuniqueid");
+        String engId = "myengineid";
+        assertEquals(new CucumberEngineDescriptor(id, engId).getEngineId(), engine.getId());
     }
 
     @Test
@@ -50,7 +51,8 @@ class CucumberTestEngineTest {
 
     @Test
     void selectAndExecuteNoScenario() {
-        EngineTestKit.engine(ENGINE_ID)
+        String engId = "myengineid";
+        EngineTestKit.engine(engId)
                 .configurationParameter(PLUGIN_PUBLISH_QUIET_PROPERTY_NAME, "true")
                 .execute()
                 .testEvents()
@@ -60,7 +62,8 @@ class CucumberTestEngineTest {
 
     @Test
     void selectAndExecuteSingleScenario() {
-        EngineTestKit.engine(ENGINE_ID)
+        String engId = "myengineid";
+        EngineTestKit.engine(engId)
                 .configurationParameter(PLUGIN_PUBLISH_QUIET_PROPERTY_NAME, "true")
                 .selectors(selectFile("src/test/resources/io/cucumber/junit/platform/engine/single.feature"))
                 .execute()
@@ -72,7 +75,8 @@ class CucumberTestEngineTest {
 
     @Test
     void selectAndSkipDisabledScenarioByTags() {
-        EngineTestKit.engine(ENGINE_ID)
+        String engId = "myengineid";
+        EngineTestKit.engine(engId)
                 .configurationParameter(PLUGIN_PUBLISH_QUIET_PROPERTY_NAME, "true")
                 .configurationParameter(FILTER_TAGS_PROPERTY_NAME, "@Integration and not @Disabled")
                 .selectors(selectFile("src/test/resources/io/cucumber/junit/platform/engine/single.feature"))
@@ -86,7 +90,8 @@ class CucumberTestEngineTest {
 
     @Test
     void selectAndSkipDisabledScenarioByName() {
-        EngineTestKit.engine(ENGINE_ID)
+        String engId = "myengineid";
+        EngineTestKit.engine(engId)
                 .configurationParameter(PLUGIN_PUBLISH_QUIET_PROPERTY_NAME, "true")
                 .configurationParameter(FILTER_NAME_PROPERTY_NAME, "^Nothing$")
                 .selectors(selectFile("src/test/resources/io/cucumber/junit/platform/engine/single.feature"))
